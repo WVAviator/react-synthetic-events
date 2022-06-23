@@ -1,0 +1,19 @@
+* {
+	box-sizing: border-box;
+}
+
+.App {
+	text-align: center;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.App button {
+	width: 10rem;
+	height: 3rem;
+	margin: 1rem auto;
+}
+
+.App p {
+	margin: 1rem auto;
+}

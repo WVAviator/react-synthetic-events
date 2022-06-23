@@ -1,0 +1,29 @@
+{
+	"name": "react-listener",
+	"version": "0.0.1",
+	"description": "React hooks for sending and receiving messages between components without persistent state.",
+	"main": "./lib/cjs/index.js",
+	"module": "./lib/esm/index.js",
+	"types": "./lib/esm/index.d.ts",
+	"author": "WVAviator",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/react": "^18.0.14",
+		"@types/react-dom": "^18.0.5",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"typescript": "^4.7.4"
+	},
+	"peerDependencies": {
+		"react": "^16.8.0",
+		"react-dom": "^16.8.0"
+	},
+	"scripts": {
+		"build": "yarn build:esm && yarn build:cjs",
+		"build:esm": "tsc",
+		"build:cjs": "tsc --module commonjs --outdir lib/cjs"
+	},
+	"files": [
+		"/lib"
+	]
+}
