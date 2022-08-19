@@ -1,4 +1,4 @@
-import { useEventDispatch } from "react-listener";
+import { useEventDispatch } from "react-synthetic-events";
 
 interface SenderButtonProps {
 	children: React.ReactNode;
