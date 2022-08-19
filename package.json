@@ -1,13 +1,14 @@
 {
-	"name": "react-listener",
-	"version": "0.0.1",
-	"description": "React hooks for sending and receiving messages between components without persistent state.",
+	"name": "react-synthetic-events",
+	"version": "0.0.2",
+	"description": "React hooks for sending and receiving custom synthetic DOM events between components without persistent state or context.",
 	"main": "./lib/cjs/index.js",
 	"module": "./lib/esm/index.js",
 	"types": "./lib/esm/index.d.ts",
 	"author": "WVAviator",
 	"license": "MIT",
 	"devDependencies": {
+		"@types/node": "^18.7.6",
 		"@types/react": "^18.0.14",
 		"@types/react-dom": "^18.0.5",
 		"typescript": "^4.7.4"

@@ -1,14 +1,15 @@
-import { useSendEvent } from "react-listener";
+import { useEventDispatch } from "react-listener";
 
 interface SenderButtonProps {
 	children: React.ReactNode;
+	name: string;
 }
 
-const SenderButton: React.FC<SenderButtonProps> = ({ children }) => {
-	const sendEvent = useSendEvent("event-name");
+const SenderButton: React.FC<SenderButtonProps> = ({ children, name }) => {
+	const sendEvent = useEventDispatch(name);
 
 	const handleClick = () => {
-		sendEvent({});
+		sendEvent();
 	};
 
 	return <button onClick={handleClick}>{children}</button>;
