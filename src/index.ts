@@ -1,2 +1,2 @@
-export { default as useReceiveEvent } from "./useReceiveEvent";
-export { default as useSendEvent } from "./useSendEvent";
+export { default as useEventListen } from "./useEventListen";
+export { default as useEventDispatch } from "./useEventDispatch";

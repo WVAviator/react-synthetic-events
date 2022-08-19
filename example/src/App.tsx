@@ -5,7 +5,8 @@ import ReceiverCount from "./ReceiverCount";
 function App() {
 	return (
 		<div className="App">
-			<SenderButton>Increase Count</SenderButton>
+			<SenderButton name="add">+</SenderButton>
+			<SenderButton name="subtract">-</SenderButton>
 			<ReceiverCount />
 		</div>
 	);

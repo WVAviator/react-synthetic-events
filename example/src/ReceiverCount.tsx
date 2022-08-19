@@ -1,13 +1,19 @@
 import { useState } from "react";
-import { useReceiveEvent } from "react-listener";
+import { useEventListen } from "react-listener";
 
 const ReceiverCount = () => {
 	const [count, setCount] = useState(0);
 
-	useReceiveEvent("event-name", () => {
-		setCount(count + 1);
+	useEventListen(`add`, (detail) => {
+		console.log(detail);
+		setCount((count) => count + 1);
 	});
 
-	return <div>Count: {count}</div>;
+	useEventListen(`subtract`, (detail) => {
+		console.log(detail);
+		setCount((count) => count - 1);
+	});
+
+	return <div>{count}</div>;
 };
 export default ReceiverCount;
