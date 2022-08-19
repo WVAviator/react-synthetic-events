@@ -188,14 +188,12 @@ const MyReceiver = () => {
 
 Additional information is available on the EventDetail object, including the timestamp of the event and the EventDispatcher. Accessing the dispatcher allows querying recent cached events, if desired.
 
-## Notes
-
-### Tips
+## Tips
 
 -   You can have multiple dispatchers and/or multiple receivers for the same event if desired.
 -   You can dispatch or receive multiple events from/to the same component if desired.
 -   When dispatching events, it is generally good practice to include information in the payload about the component that dispatched them, even if you don't intend to use it.
 
-### Contributing
+## Contributing
 
 This project is in ongoing development. If you wish to contribute, feel free to open a ticket with a suggested feature or bug.
