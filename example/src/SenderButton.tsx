@@ -1,4 +1,4 @@
-import { useEventDispatch } from "react-synthetic-events";
+import { useEventDispatch, useSharedState } from "react-synthetic-events";
 
 interface SenderButtonProps {
 	children: React.ReactNode;
@@ -6,12 +6,18 @@ interface SenderButtonProps {
 }
 
 const SenderButton: React.FC<SenderButtonProps> = ({ children, name }) => {
-	const sendEvent = useEventDispatch(name);
+	// const sendEvent = useEventDispatch(name);
 
-	const handleClick = () => {
-		sendEvent();
-	};
+	// const handleClick = () => {
+	// 	sendEvent();
+	// };
 
-	return <button onClick={handleClick}>{children}</button>;
+	const [sharedState, setSharedState] = useSharedState(0, name);
+
+	return (
+		<button onClick={() => setSharedState(sharedState + 1)}>
+			{sharedState}
+		</button>
+	);
 };
 export default SenderButton;
