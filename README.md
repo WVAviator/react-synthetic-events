@@ -2,6 +2,8 @@
 
 A lightweight alternative to a state management library that follows the observer pattern. Using synthetic events, components can broadcast their own internal state where any other interested components can subscribe (or listen) to those events and adjust their own internal state however they see fit.
 
+With this hooks library, you can send and receive events using useEventDispatch and useEventListen, and you can share state between two unconnected components with useSharedState.
+
 ## Why use synthetic events instead of a traditional state management library?
 
 ### Lightweight and simple
@@ -102,7 +104,7 @@ const MyDispatcher = () => {
 };
 ```
 
-In addition to the event name, an additional EventDispatcherOptions object can be passed as a second argument. This can be used to adjust the size of the event cache, if desired.
+In addition to the event name, an additional `EventDispatcherOptions` object can be passed as a second argument. This can be used to adjust the size of the event cache, if desired.
 
 ### useEventListen
 
@@ -126,7 +128,7 @@ const MyReceiver = () => {
 };
 ```
 
-Optionally you can use this hook's return value to provide your component with the EventDetail from the latest event that was called.
+Optionally you can use this hook's return value to provide your component with the `EventDetail` from the latest event that was called.
 
 ```tsx
 import { useEventListen } from "react-synthetic-events";
@@ -168,7 +170,7 @@ const MyReceiver = () => {
 };
 ```
 
-This callback receives the same EventDetail object that the function returns. This can be useful for updating component state.
+This callback receives the same `EventDetail` object that the function returns. This can be useful for updating component state.
 
 ```tsx
 import { useState } from "react";
@@ -186,7 +188,49 @@ const MyReceiver = () => {
 };
 ```
 
-Additional information is available on the EventDetail object, including the timestamp of the event and the EventDispatcher. Accessing the dispatcher allows querying recent cached events, if desired.
+Additional information is available on the `EventDetail` object, including the timestamp of the event and the `EventDispatcher`. Accessing the dispatcher allows querying recent cached events, if desired.
+
+### useSharedState
+
+The `useSharedState` hook functions very similarly to the `React.useState` hook, but it takes a second argument that represents a state key. Any components that use the same key will receive the same state updates.
+
+Basic usage:
+
+```tsx
+import { useSharedState } from "react-synthetic-events";
+
+const SharedStateButton = () => {
+	const [myState, setMyState] = useSharedState(0, "myStateKey");
+
+	return <button onClick={() => setState(state + 1)}>{state}</button>;
+};
+
+export default SharedStateButton;
+```
+
+The behavior of the state update in each component will depend on the argument passed into the setter function. Just like with `React.useState`, you can pass the new updated state, like so:
+
+```tsx
+return <button onClick={() => setMyState(state + 1)}>{state}</button>;
+```
+
+Or you can pass in a callback function that takes the previous state and returns an updated value, like so:
+
+```tsx
+return (
+	<button onClick={() => setMyState((state) => state + 1)}>{state}</button>
+);
+```
+
+Passing in the new updated state (as in the first example) will update the state of all listening components to match the state of the updating component. If, for some reason, you had three components with different values, say 1, 3, and 5 - and you called `setMyState(state + 1)` on the component with a current state value of 5, then all three components' state will simultaneously update to 6.
+
+Passing in a function to update the state as in the second example above will instead only update each components' state based on its own existing state value. So once again, calling `setMyState(state => state + 1)` on the same components with values 1, 3, and 5 will result in them updating to 2, 4, and 6.
+
+### Note: Dynamic event and state keys
+
+How and why would `useSharedState` components all have different values in the first place? Well, if desired you can dynamically change the provided state key, either with props from the parent component, or another state variable in the existing components. You can even use a useSharedState hook to update the keys of other useSharedState hooks - I won't judge you.
+
+Dynamically changing the keys of `useEventDispatch` and `useEventListen` can also provide for some interesting design patterns. Notably, dynamically changing the key of a `useEventDispatch` hook maintains the same internal `EventDispatcher` object and event cache that the listening component has access to, making it possible for event listeners to access previous events that were dispatched elsewhere by the same component. Not that you'd ever need to do that - but maybe?
 
 ## Tips
 

@@ -6,18 +6,14 @@ interface SenderButtonProps {
 }
 
 const SenderButton: React.FC<SenderButtonProps> = ({ children, name }) => {
-	// const sendEvent = useEventDispatch(name);
+	const sendEvent = useEventDispatch(name);
 
-	// const handleClick = () => {
-	// 	sendEvent();
-	// };
+	const handleClick = () => {
+		sendEvent();
+	};
 
-	const [sharedState, setSharedState] = useSharedState(0, name);
+	// const [sharedState, setSharedState] = useSharedState(0, name);
 
-	return (
-		<button onClick={() => setSharedState(sharedState + 1)}>
-			{sharedState}
-		</button>
-	);
+	return <button onClick={handleClick}>{name}</button>;
 };
 export default SenderButton;

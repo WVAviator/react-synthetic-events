@@ -1,6 +1,6 @@
 {
 	"name": "react-synthetic-events",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "React hooks for sending and receiving custom synthetic DOM events between components without persistent state or context.",
 	"main": "./lib/cjs/index.js",
 	"module": "./lib/esm/index.js",

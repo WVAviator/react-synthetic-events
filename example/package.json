@@ -14,7 +14,7 @@
 		"react-dom": "^18.2.0",
 		"react-listener": "link:..",
 		"react-scripts": "5.0.1",
-		"react-synthetic-events": "file:..",
+		"react-synthetic-events": "./..",
 		"typescript": "^4.4.2",
 		"web-vitals": "^2.1.0"
 	},

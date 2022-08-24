@@ -2,23 +2,26 @@ import "./App.css";
 import SenderButton from "./SenderButton";
 import ReceiverCount from "./ReceiverCount";
 import { useState } from "react";
+import SharedStateButton from "./SharedStateButton";
 
 function App() {
-	const [key, setKey] = useState("key1");
+	const [key, setKey] = useState("add");
 	return (
 		<div className="App">
-			<SenderButton name="key1">+</SenderButton>
-			<SenderButton name={key}>-</SenderButton>
-			<ReceiverCount />
+			{/* <SenderButton name="add">add</SenderButton>
+			<SenderButton name={key}>{key}</SenderButton>
+			<ReceiverCount /> */}
 			<button
 				onClick={() =>
-					setKey((key) => {
-						return key === "key1" ? "key2" : "key1";
-					})
+					setKey((key) => (key === "add" ? "subtract" : "add"))
 				}
 			>
 				Change Keys
 			</button>
+			<SharedStateButton eventKey={key} />
+			<SharedStateButton eventKey="subtract" />
+			<SharedStateButton eventKey={key} />
+			<SharedStateButton eventKey="subtract" />
 		</div>
 	);
 }
