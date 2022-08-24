@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useEventListen } from "react-listener";
+import { useEventListen, useSharedState } from "react-synthetic-events";
 
 const ReceiverCount = () => {
 	const [count, setCount] = useState(0);

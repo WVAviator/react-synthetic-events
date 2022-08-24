@@ -3,11 +3,11 @@ import { EventDetail } from "./EventDetail";
 import { EventDispatcherOptions } from "./EventDispatcherOptions";
 
 export class EventDispatcher<TPayload> {
-	public eventName;
+	public eventKey;
 	public eventCache: EventCache;
 
 	constructor(eventName: string, options?: EventDispatcherOptions) {
-		this.eventName = eventName;
+		this.eventKey = eventName;
 		this.eventCache = new EventCache(options?.maxCacheSize ?? 25);
 	}
 
@@ -20,8 +20,9 @@ export class EventDispatcher<TPayload> {
 			payload,
 			timestamp: new Date(),
 			dispatcher: this,
+			eventKey: this.eventKey,
 		};
-		const customEvent = new CustomEvent(this.eventName, { detail });
+		const customEvent = new CustomEvent(this.eventKey, { detail });
 		this.eventCache.enqueue(customEvent);
 		window.dispatchEvent(customEvent);
 	}
@@ -44,5 +45,13 @@ export class EventDispatcher<TPayload> {
 			return this.eventCache.allEventsSince(date);
 		}
 		return this.eventCache.values;
+	}
+
+	/**
+	 * Updates the event key to change the receiver of the events but preserve the cache.
+	 * @param newKey The new event name to use for this dispatcher
+	 */
+	public updateKey(newKey: string) {
+		this.eventKey = newKey;
 	}
 }

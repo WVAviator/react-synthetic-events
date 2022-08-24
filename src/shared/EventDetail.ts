@@ -15,4 +15,9 @@ export interface EventDetail<TPayload> {
 	 * The dispatcher represents the event dispatcher that dispatched the event. Dispatchers provide more information about events that have been sent, including the event name, the event cache, and the event detail.
 	 */
 	dispatcher: EventDispatcher<TPayload>;
+
+	/**
+	 * The event name used to dispatch the event.
+	 */
+	eventKey: string;
 }
